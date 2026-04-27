@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monte seu Terço - Laços Encantus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #fff, #ffe6f2);
+  min-height: 100vh;
+}
+
+header {
+  background: #fff;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid gold;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(212,175,55,0.12);
+}
+
+.logo { width: 80px; cursor: pointer; }
+.logo-fallback {
+  width: 80px; height: 80px;
+  display: none; margin: 0 auto;
+  background: gold; border-radius: 50%;
+  align-items: center; justify-content: center;
+  font-weight: 600; font-size: 13px; color: #fff; cursor: pointer;
+}
+
+nav {
+  background: #ff4da6;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+nav a { color: white; text-decoration: none; font-size: 14px; font-weight: 500; }
+
+/* PAGE TITLE */
+.page-title {
+  text-align: center;
+  padding: 28px 20px 10px;
+}
+.page-title h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #d4af37;
+  margin: 0 0 4px;
+  letter-spacing: 0.3px;
+}
+.page-title p {
+  font-size: 13px;
+  color: #999;
+  margin: 0;
+}
+
+/* PROGRESS BAR */
+.progress-wrap {
+  max-width: 520px;
+  margin: 16px auto 0;
+  padding: 0 20px;
+}
+.progress-bar {
+  height: 4px;
+  background: #fde;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff4da6, #d4af37);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+.progress-label {
+  font-size: 11px;
+  color: #bbb;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.box {
+  background: white;
+  padding: 20px;
+  margin: 16px auto 30px;
+  max-width: 520px;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+
+.tipo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+@media (max-width: 480px) {
+  .tipo-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.secao-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0 10px;
+  padding-top: 16px;
+  border-top: 1px solid #faf0f5;
+}
+.secao-header label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #444;
+  flex: 1;
+  letter-spacing: 0.3px;
+}
+.btn-voltar {
+  background: none;
+  border: 1.5px solid #ffb3d9;
+  color: #ff4da6;
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  width: auto;
+  margin: 0;
+  transition: 0.2s;
+}
+.btn-voltar:hover { background: #fff0f7; }
+
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.option {
+  border: 2px solid #eee;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  transition: 0.2s;
+  font-size: 13px;
+  background: #fafafa;
+}
+.option:hover { transform: scale(1.02); border-color: #ffd966; background: #fffdf0; }
+
+.option-media {
+  width: 100%;
+  height: 90px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fff5fb, #fffbe8);
+  font-size: 38px;
+}
+.option-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.option.selected { border: 2px solid #d4af37; background: #fffbeb; }
+
+.tipo-card {
+  border: 2px solid #eee;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  padding: 12px 6px;
+  transition: 0.2s;
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+  background: #fafafa;
+}
+.tipo-card:hover { transform: scale(1.03); border-color: #ffd966; background: #fffbeb; }
+.tipo-card.selected { border: 2px solid #d4af37; background: #fffbeb; color: #b8860b; }
+.tipo-card .icone { font-size: 24px; margin-bottom: 5px; }
+
+.price {
+  color: #ff4da6;
+  font-weight: 600;
+  font-size: 12px;
+  display: block;
+  margin-top: 3px;
+}
+
+/* TOTAL BOX */
+.total-box {
+  margin-top: 18px;
+  background: linear-gradient(135deg, #fff9f0, #fff0f8);
+  border: 1.5px solid #ffd6e7;
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.total-label {
+  font-size: 13px;
+  color: #999;
+  font-weight: 400;
+}
+.total-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #d4af37;
+}
+
+.btn-principal {
+  width: 100%;
+  padding: 14px;
+  margin-top: 14px;
+  background: linear-gradient(135deg, #d4af37, #f0d060);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #1a1a1a;
+  transition: 0.2s;
+  box-shadow: 0 4px 14px rgba(212,175,55,0.3);
+  letter-spacing: 0.2px;
+}
+.btn-principal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212,175,55,0.4);
+}
+.btn-principal:active { transform: translateY(0); }
+
+/* POPUP SUCESSO */
+#popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+#popup-overlay.ativo { display: flex; }
+
+#popup-caixa {
+  background: #fff;
+  border-radius: 22px;
+  padding: 32px 28px;
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 12px 50px rgba(0,0,0,0.18);
+  animation: popIn 0.25s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.popup-icone { font-size: 52px; line-height: 1; margin-bottom: 14px; }
+
+#popup-caixa h3 { margin: 0 0 8px; color: #222; font-size: 18px; font-weight: 600; }
+#popup-caixa p  { margin: 0 0 22px; color: #888; font-size: 13px; line-height: 1.6; }
+
+.popup-botoes { display: flex; flex-direction: column; gap: 10px; }
+
+.popup-btn-carrinho {
+  background: #ff4da6; color: white;
+  border: none; border-radius: 12px;
+  padding: 13px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600; font-size: 14px;
+  cursor: pointer; transition: 0.2s;
+}
+.popup-btn-carrinho:hover { background: #e6008c; }
+
+.popup-btn-continuar {
+  background: none;
+  border: 1.5px solid #eee;
+  border-radius: 12px; padding: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px; color: #999;
+  cursor: pointer; transition: 0.2s;
+}
+.popup-btn-continuar:hover { border-color: #ccc; color: #666; }
+
+/* POPUP ERRO */
+#popup-erro-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+#popup-erro-overlay.ativo { display: flex; }
+
+#popup-erro-caixa {
+  background: #fff;
+  border-radius: 18px;
+  padding: 26px 22px;
+  max-width: 290px; width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  animation: popIn 0.2s ease;
+}
+#popup-erro-caixa h3 { margin: 0 0 6px; color: #e63946; font-size: 16px; }
+#popup-erro-caixa p  { margin: 0 0 16px; color: #777; font-size: 13px; line-height: 1.5; }
+
+.popup-btn-fechar {
+  background: #f8f8f8;
+  border: 1.5px solid #eee;
+  border-radius: 10px; padding: 10px 22px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px; cursor: pointer; color: #666;
+  transition: 0.2s;
+}
+.popup-btn-fechar:hover { background: #f0f0f0; }
+
+/* CAMPOS DE PERSONALIZAÇÃO */
+.campo-texto {
+  margin-top: 10px;
+}
+.campo-texto label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 5px;
+}
+.campo-texto input,
+.campo-texto textarea,
+.campo-texto select {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1.5px solid #eee;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: 0.2s;
+  background: #fafafa;
+  color: #333;
+}
+.campo-texto input:focus,
+.campo-texto textarea:focus,
+.campo-texto select:focus { border-color: #ff4da6; background: #fff; }
+.campo-texto textarea { resize: vertical; min-height: 64px; }
+
+.formato-opcoes {
+  display: flex;
+  gap: 18px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+.formato-opcoes label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+.formato-opcoes input[type="radio"] {
+  width: auto;
+  accent-color: #ff4da6;
+}
+
+.campo-upload {
+  margin-top: 10px;
+}
+.campo-upload label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 5px;
+}
+.campo-upload input[type="file"] {
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: #999;
+}
+
+/* LABEL DE SEÇÃO */
+.secao-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #444;
+  display: block;
+  margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img
+    src="logo.png" class="logo" alt="Logo"
+    onclick="irInicio()"
+    onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='flex';"
+  >
+  <div class="logo-fallback" onclick="irInicio()">Laços</div>
+</header>
+
+<nav>
+  <a href="index.html">Início</a>
+  <a href="terco.html">Montar</a>
+  <a href="produtos.html">Produtos</a>
+  <a href="carrinho.html">🛒 Carrinho</a>
+</nav>
+
+<div class="page-title">
+  <h2>Monte o Seu Terço</h2>
+  <p>Personalize cada detalhe com amor e fé</p>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-label" id="progress-label">Escolha o tipo para começar</div>
+</div>
+
+<div class="box">
+
+  <!-- TIPO -->
+  <span class="secao-label">Escolha o Tipo</span>
+  <div class="tipo-grid" id="tipo-grid">
+    <div class="tipo-card" onclick="selectTipo('pulso', this)">
+      <div class="icone">💗</div>Pulso
+    </div>
+    <div class="tipo-card" onclick="selectTipo('tradicional', this)">
+      <div class="icone">🙏</div>Tradicional
+    </div>
+    <div class="tipo-card" onclick="selectTipo('chaveiro', this)">
+      <div class="icone">🔑</div>Chaveiro
+    </div>
+    <div class="tipo-card" onclick="selectTipo('veiculo', this)">
+      <div class="icone">🚗</div>Veículo
+    </div>
+    <div class="tipo-card" onclick="selectTipo('noiva', this)">
+      <div class="icone">💍</div>Noiva
+    </div>
+    <div class="tipo-card" onclick="selectTipo('luxo', this)">
+      <div class="icone">✨</div>Luxo
+    </div>
+    <div class="tipo-card" onclick="selectTipo('infantil', this)">
+      <div class="icone">🧸</div>Infantil
+    </div>
+    <div class="tipo-card" onclick="selectTipo('embalagem', this)">
+      <div class="icone">🎁</div>Embalagem
+    </div>
+  </div>
+
+  <!-- CATEGORIAS -->
+  <div id="categorias-area" style="display:none;">
+    <div class="secao-header">
+      <label id="label-categoria">Categoria</label>
+      <button class="btn-voltar" onclick="voltar('categorias')">← Voltar</button>
+    </div>
+    <div id="categorias" class="option-grid"></div>
+  </div>
+
+  <!-- MODELOS -->
+  <div id="modelos-area" style="display:none;">
+    <div class="secao-header">
+      <label id="label-modelo">Modelo</label>
+      <button class="btn-voltar" onclick="voltar('modelos')">← Voltar</button>
+    </div>
+    <div id="modelos" class="option-grid"></div>
+  </div>
+
+  <!-- CORES -->
+  <div id="cores-area" style="display:none;">
+    <div class="secao-header">
+      <label id="label-cor">Cor</label>
+      <button class="btn-voltar" onclick="voltar('cores')">← Voltar</button>
+    </div>
+    <div id="cores" class="option-grid"></div>
+  </div>
+
+  <!-- MISTÉRIOS -->
+  <div id="misterios-area" style="display:none;">
+    <div class="secao-header">
+      <label id="label-misterio">Mistério</label>
+      <button class="btn-voltar" onclick="voltar('misterios')">← Voltar</button>
+    </div>
+    <div id="misterios" class="option-grid"></div>
+  </div>
+
+  <!-- PERSONALIZAÇÃO -->
+  <div id="personalizacao-area" style="display:none;">
+    <div class="secao-header">
+      <label>Personalização</label>
+    </div>
+    <div id="personalizacao-conteudo"></div>
+  </div>
+
+  <div class="total-box">
+    <span class="total-label">Total do pedido</span>
+    <span class="total-value">R$ <span id="total">0,00</span></span>
+  </div>
+
+  <button class="btn-principal" onclick="finalizar()">🛒 Adicionar ao Carrinho</button>
+
+</div>
+
+<!-- Popup sucesso -->
+<div id="popup-overlay">
+  <div id="popup-caixa">
+    <div class="popup-icone">✅</div>
+    <h3>Adicionado com sucesso!</h3>
+    <p>Seu produto foi adicionado ao carrinho. Deseja continuar montando ou ir ao carrinho?</p>
+    <div class="popup-botoes">
+      <button class="popup-btn-carrinho" onclick="irCarrinho()">🛒 Ir ao Carrinho</button>
+      <button class="popup-btn-continuar" onclick="fecharPopup()">Continuar montando</button>
+    </div>
+  </div>
+</div>
+
+<!-- Popup erro -->
+<div id="popup-erro-overlay">
+  <div id="popup-erro-caixa">
+    <div class="popup-icone">⚠️</div>
+    <h3 id="popup-erro-titulo">Atenção</h3>
+    <p id="popup-erro-msg">Preencha todos os campos.</p>
+    <button class="popup-btn-fechar" onclick="fecharPopupErro()">Entendi</button>
+  </div>
+</div>
+
+<script>
+
+/* =============================================
+   ESTADO GLOBAL
+   ============================================= */
+let selecao = {
+  tipo:'', categoria:'', modelo:'',
+  corBase:'', cor:'', misterioCat:'', misterio:'',
+  personalizacao: {}
+};
+let precoModelo = 0, precoCor = 0, precoMisterio = 0;
+
+const etapas = ['tipo','categoria','modelo','cor','misterio'];
+
+/* =============================================
+   UTILITÁRIOS
+   ============================================= */
+function recalcularTotal() {
+  const t = precoModelo + precoCor + precoMisterio;
+  document.getElementById('total').textContent = t.toFixed(2).replace('.', ',');
+  atualizarProgresso();
+}
+
+function atualizarProgresso() {
+  let passo = 0;
+  if (selecao.tipo) passo++;
+  if (selecao.categoria || selecao.tipo === 'embalagem') passo++;
+  if (selecao.modelo) passo++;
+  if (selecao.cor || tiposSemCorMisterio.includes(selecao.tipo)) passo++;
+  if (selecao.misterio || tiposSemCorMisterio.includes(selecao.tipo)) passo++;
+
+  const pct = Math.round((passo / 5) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  const labels = ['Escolha o tipo para começar','Categoria selecionada ✓','Modelo selecionado ✓','Cor selecionada ✓','Quase pronto! Escolha o mistério ✓'];
+  document.getElementById('progress-label').textContent = labels[passo] || 'Pronto para adicionar! ✨';
+}
+
+function gerarItens(prefixo, quantidade, preco, emoji = '📿') {
+  const lista = [];
+  for (let i = 1; i <= quantidade; i++) {
+    lista.push({ nome: `${prefixo} ${i}`, preco: preco, img: null, emoji: emoji });
+  }
+  return lista;
+}
+
+function marcarSelecionado(el) {
+  el.parentElement.querySelectorAll('.option, .tipo-card').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function irInicio()   { window.location.href = 'index.html'; }
+function irCarrinho() { window.location.href = 'carrinho.html'; }
+
+function renderMedia(item) {
+  if (item.img) {
+    return `
+      <div class="option-media">
+        <img src="${item.img}" alt="${item.nome}"
+          onerror="this.parentElement.innerHTML='<span>${item.emoji || '📿'}</span>'">
+      </div>`;
+  }
+  return `<div class="option-media">${item.emoji || '📿'}</div>`;
+}
+
+/* =============================================
+   BANCO DE DADOS DE PRODUTOS
+   ============================================= */
+const categoriasTradicional = {
+  "Nossa Senhora Aparecida":  gerarItens("Nossa Sra. Aparecida", 15, 40, '🕊️'),
+  "Nossa Senhora das Graças": gerarItens("Nossa Sra. das Graças", 10, 40, '💙'),
+  "Guadalupe":                gerarItens("Guadalupe", 5, 40, '🌹'),
+  "Santa Rita de Cássia":     gerarItens("Sta. Rita de Cássia", 5, 40, '🌸'),
+  "Santa Terezinha":          gerarItens("Santa Terezinha", 5, 40, '🌺'),
+  "Sagrada Família":          gerarItens("Sagrada Família", 5, 40, '👨‍👩‍👦'),
+  "Nossa Senhora de Fátima":  gerarItens("Fátima", 5, 40, '⭐'),
+  "São José":                 gerarItens("São José", 5, 40, '🛠️'),
+  "Espírito Santo":           gerarItens("Espírito Santo", 5, 40, '🕊️'),
+  "Jesus":                    gerarItens("Jesus", 5, 40, '✝️'),
+  "Carlos Acutis":            gerarItens("Carlos Acutis", 5, 40, '💻'),
+  "São Miguel":               gerarItens("São Miguel", 5, 40, '⚔️'),
+  "Santo Antônio":            gerarItens("Santo Antônio", 5, 40, '🙏'),
+  "Santa Luzia":              gerarItens("Santa Luzia", 5, 40, '👁️')
+};
+
+const bancoModelos = {
+  pulso: {
+    "São Bento":                gerarItens("São Bento Pulso", 5, 35, '✝️'),
+    "Nossa Senhora Aparecida":  gerarItens("Aparecida Pulso", 5, 35, '🕊️'),
+    "Nossa Senhora das Graças": gerarItens("Graças Pulso", 5, 35, '💙'),
+    "Cristal":                  gerarItens("Cristal Pulso", 5, 45, '💎')
+  },
+  tradicional: categoriasTradicional,
+  chaveiro: {
+    "São Bento":               gerarItens("Chaveiro São Bento", 6, 25, '✝️'),
+    "Nossa Sra. Aparecida":    gerarItens("Chaveiro Aparecida", 6, 25, '🕊️'),
+    "Santo Antônio":           gerarItens("Chaveiro Santo Antônio", 4, 25, '🙏'),
+    "São Miguel":              gerarItens("Chaveiro São Miguel", 4, 25, '⚔️'),
+    "Anjo da Guarda":          gerarItens("Chaveiro Anjo Guarda", 4, 25, '😇'),
+    "Sagrada Família":         gerarItens("Chaveiro Sagrada Família", 4, 25, '👨‍👩‍👦')
+  },
+  veiculo: categoriasTradicional,
+  noiva: {
+    "Prata":   gerarItens("Noiva Prata", 5, 65, '🪙'),
+    "Dourado": gerarItens("Noiva Dourado", 5, 70, '💛')
+  },
+  luxo: {
+    "Cristal Swarovski":       gerarItens("Luxo Swarovski", 6, 120, '✨'),
+    "Ouro e Cristal":          gerarItens("Luxo Ouro Crystal", 5, 110, '💛'),
+    "Prata e Pérola":          gerarItens("Luxo Prata Pérola", 5, 100, '🪙'),
+    "Madrepérola":             gerarItens("Luxo Madrepérola", 4, 95, '🌙'),
+    "Banhado a Ouro":          gerarItens("Luxo Banhado Ouro", 4, 115, '👑')
+  },
+  infantil: {
+    "Emborrachado": gerarItens("Infantil Emborrachado", 6, 30, '🧸'),
+    "Metal":        gerarItens("Infantil Metal", 5, 35, '⚙️'),
+    "Biscuit":      gerarItens("Infantil Biscuit", 5, 32, '🎨')
+  },
+  // EMBALAGEM com preços definidos
+  embalagem: {
+    "PP": [{ nome: "Embalagem PP", preco: 8,  img: null, emoji: '📦' }],
+    "P":  [{ nome: "Embalagem P",  preco: 12, img: null, emoji: '📦' }],
+    "M":  [{ nome: "Embalagem M",  preco: 18, img: null, emoji: '🎁' }],
+    "G":  [{ nome: "Embalagem G",  preco: 25, img: null, emoji: '🎁' }]
+  }
+};
+
+const coresDisponiveis = {
+  "Preto":    gerarItens("Preto", 6, 8, '🖤'),
+  "Azul":     gerarItens("Azul", 6, 8, '💙'),
+  "Amarelo":  gerarItens("Amarelo", 3, 8, '💛'),
+  "Laranja":  gerarItens("Laranja", 2, 8, '🧡'),
+  "Rosa":     gerarItens("Rosa", 8, 8, '🩷'),
+  "Branco":   gerarItens("Branco", 6, 8, '🤍'),
+  "Vermelho": gerarItens("Vermelho", 6, 8, '❤️'),
+  "Roxo":     gerarItens("Roxo", 4, 8, '💜'),
+  "Verde":    gerarItens("Verde", 4, 8, '💚')
+};
+
+const coresPorTipo = {
+  noiva: {
+    "Prata":   gerarItens("Linha Prata", 5, 8, '🪙'),
+    "Dourado": gerarItens("Linha Dourada", 5, 10, '💛')
+  },
+  luxo: {
+    "Dourado":   gerarItens("Dourado Luxo", 5, 15, '💛'),
+    "Prateado":  gerarItens("Prateado Luxo", 5, 15, '🪙'),
+    "Rosê Gold": gerarItens("Rosê Gold", 4, 15, '🌸'),
+    "Cristal":   gerarItens("Cristal Luxo", 4, 15, '💎'),
+    "Bordô":     gerarItens("Bordô Luxo", 3, 15, '🍷')
+  },
+  infantil: {
+    "Rosa":      gerarItens("Rosa Infantil", 6, 8, '🩷'),
+    "Azul Bebê": gerarItens("Azul Bebê", 5, 8, '🩵'),
+    "Amarelo":   gerarItens("Amarelo Infantil", 4, 8, '💛'),
+    "Lilás":     gerarItens("Lilás", 4, 8, '💜'),
+    "Verde":     gerarItens("Verde Infantil", 4, 8, '💚'),
+    "Arco-Íris": gerarItens("Multicolor", 3, 8, '🌈')
+  }
+};
+
+const bancoMisteriosPorTipo = {
+  default: {
+    "Granulados": gerarItens("Granulado", 6, 12, '⚪'),
+    "Variados":   gerarItens("Variado", 6, 12, '🔮'),
+    "Flores":     gerarItens("Flores", 6, 14, '🌸'),
+    "Perolados":  gerarItens("Perolado", 6, 14, '🪞')
+  },
+  chaveiro: {
+    "Crucifixo Simples":    gerarItens("Crucifixo Simples", 5, 8, '✝️'),
+    "Crucifixo Trabalhado": gerarItens("Crucifixo Trabalhado", 5, 12, '⛪'),
+    "Medalha":              gerarItens("Medalha", 5, 10, '🏅')
+  },
+  veiculo: {
+    "Crucifixo Simples": gerarItens("Crucifixo Veículo", 5, 8, '✝️'),
+    "Medalha":           gerarItens("Medalha Veículo", 5, 10, '🏅'),
+    "Centro Especial":   gerarItens("Centro Especial", 4, 15, '⭐')
+  },
+  noiva: {
+    "Rosas":     gerarItens("Mistério Rosa", 5, 18, '🌹'),
+    "Coração":   gerarItens("Coração Noiva", 5, 18, '💕'),
+    "Borboleta": gerarItens("Borboleta Noiva", 4, 18, '🦋'),
+    "Pomba":     gerarItens("Pomba Noiva", 4, 18, '🕊️')
+  },
+  luxo: {
+    "Swarovski":        gerarItens("Swarovski", 5, 30, '💎'),
+    "Cristal Facetado": gerarItens("Cristal Facetado", 5, 25, '✨'),
+    "Ouro 18k":         gerarItens("Ouro 18k", 4, 40, '👑')
+  },
+  infantil: {
+    "Estrelinhas":  gerarItens("Estrelinhas Inf.", 5, 10, '⭐'),
+    "Borboletas":   gerarItens("Borboletas Inf.", 5, 10, '🦋'),
+    "Coração":      gerarItens("Coração Inf.", 5, 10, '💕'),
+    "Animalzinhos": gerarItens("Animalzinhos", 5, 10, '🐣')
+  }
+};
+
+const tiposComPersonalizacao = ['noiva', 'embalagem'];
+const tiposSemCorMisterio    = ['embalagem'];
+
+/* =============================================
+   FLUXO DE SELEÇÃO
+   ============================================= */
+function resetarFluxo() {
+  const tipoSalvo = selecao.tipo;
+  selecao = { tipo: tipoSalvo, categoria:'', modelo:'', corBase:'', cor:'', misterioCat:'', misterio:'', personalizacao:{} };
+  precoModelo = precoCor = precoMisterio = 0;
+  recalcularTotal();
+  ['modelos-area','cores-area','misterios-area','personalizacao-area'].forEach(id =>
+    document.getElementById(id).style.display = 'none'
+  );
+}
+
+function voltar(etapa) {
+  if (etapa === 'categorias') {
+    ['categorias-area','modelos-area','cores-area','misterios-area','personalizacao-area'].forEach(id =>
+      document.getElementById(id).style.display = 'none'
+    );
+    selecao = { tipo:'', categoria:'', modelo:'', corBase:'', cor:'', misterioCat:'', misterio:'', personalizacao:{} };
+    precoModelo = precoCor = precoMisterio = 0;
+    document.querySelectorAll('.option, .tipo-card').forEach(o => o.classList.remove('selected'));
+  } else if (etapa === 'modelos') {
+    ['modelos-area','cores-area','misterios-area','personalizacao-area'].forEach(id =>
+      document.getElementById(id).style.display = 'none'
+    );
+    selecao.modelo = selecao.corBase = selecao.cor = selecao.misterioCat = selecao.misterio = '';
+    precoModelo = precoCor = precoMisterio = 0;
+  } else if (etapa === 'cores') {
+    ['cores-area','misterios-area'].forEach(id =>
+      document.getElementById(id).style.display = 'none'
+    );
+    selecao.corBase = selecao.cor = selecao.misterioCat = selecao.misterio = '';
+    precoCor = precoMisterio = 0;
+  } else if (etapa === 'misterios') {
+    document.getElementById('misterios-area').style.display = 'none';
+    selecao.misterioCat = selecao.misterio = '';
+    precoMisterio = 0;
+  }
+  recalcularTotal();
+}
+
+function selectTipo(valor, el) {
+  selecao.tipo = valor;
+  resetarFluxo();
+
+  document.querySelectorAll('.tipo-card').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+
+  const banco = bancoModelos[valor];
+  let html = '';
+  Object.keys(banco).forEach(cat => {
+    const item = banco[cat][0];
+    const preco = item ? item.preco : 0;
+    const precoLabel = (valor === 'embalagem' && preco > 0)
+      ? `<span class="price">R$ ${preco},00</span>`
+      : '';
+    html += `<div class="option" data-tipo="${valor}" data-cat="${cat}" onclick="selectCategoria(this)">
+      <div class="option-media">${item ? (item.emoji || '📿') : '📿'}</div>
+      ${cat}${precoLabel}
+    </div>`;
+  });
+  document.getElementById('categorias').innerHTML = html;
+
+  const labels = {
+    embalagem:   'Tamanho da Embalagem',
+    noiva:       'Linha da Noiva',
+    luxo:        'Linha de Luxo',
+    infantil:    'Material',
+    chaveiro:    'Tipo de Chaveiro',
+    veiculo:     'Padroeiro do Veículo',
+    tradicional: 'Padroeiro / Tema',
+    pulso:       'Padroeiro / Tema'
+  };
+  document.getElementById('label-categoria').textContent = labels[valor] || 'Categoria';
+  document.getElementById('categorias-area').style.display = 'block';
+}
+
+function selectCategoria(el) {
+  const tipo = el.dataset.tipo, cat = el.dataset.cat;
+  selecao.categoria = cat;
+  selecao.modelo = selecao.corBase = selecao.cor = selecao.misterioCat = selecao.misterio = '';
+  precoModelo = precoCor = precoMisterio = 0;
+  recalcularTotal();
+  ['modelos-area','cores-area','misterios-area'].forEach(id =>
+    document.getElementById(id).style.display = 'none'
+  );
+  marcarSelecionado(el);
+
+  if (tipo === 'embalagem') {
+    selecao.modelo = `Embalagem ${cat}`;
+    precoModelo = bancoModelos.embalagem[cat][0].preco;
+    recalcularTotal();
+    mostrarPersonalizacao(tipo);
+    return;
+  }
+
+  let html = '';
+  bancoModelos[tipo][cat].forEach(m => {
+    html += `
+      <div class="option" data-nome="${m.nome}" data-preco="${m.preco}" onclick="selectModelo(this)">
+        ${renderMedia(m)}
+        <span>${m.nome}</span>
+        ${m.preco > 0 ? `<span class="price">R$ ${m.preco},00</span>` : ''}
+      </div>`;
+  });
+  document.getElementById('modelos').innerHTML = html;
+
+  const labelsModelo = {
+    noiva:       'Modelo da Noiva',
+    luxo:        'Modelo de Luxo',
+    infantil:    'Modelo Infantil',
+    chaveiro:    'Modelo do Chaveiro',
+    veiculo:     'Modelo do Veículo',
+    tradicional: 'Modelo',
+    pulso:       'Modelo'
+  };
+  document.getElementById('label-modelo').textContent = labelsModelo[tipo] || 'Modelo';
+  document.getElementById('modelos-area').style.display = 'block';
+}
+
+function selectModelo(el) {
+  selecao.modelo = el.dataset.nome;
+  precoModelo    = Number(el.dataset.preco);
+  selecao.corBase = selecao.cor = selecao.misterioCat = selecao.misterio = '';
+  precoCor = precoMisterio = 0;
+  recalcularTotal();
+  marcarSelecionado(el);
+
+  const tipo = selecao.tipo;
+
+  if (tiposSemCorMisterio.includes(tipo)) {
+    document.getElementById('cores-area').style.display = 'none';
+    document.getElementById('misterios-area').style.display = 'none';
+    mostrarPersonalizacao(tipo);
+    return;
+  }
+
+  const cores = coresPorTipo[tipo] || coresDisponiveis;
+  let html = '';
+  Object.keys(cores).forEach(cor => {
+    html += `<div class="option" data-cor="${cor}" onclick="selectCorBase(this)"><div class="option-media" style="font-size:28px">${cores[cor][0]?.emoji || '🎨'}</div>${cor}</div>`;
+  });
+  document.getElementById('cores').innerHTML = html;
+
+  const labelsCor = {
+    noiva:    'Cor da Linha',
+    luxo:     'Acabamento',
+    infantil: 'Cor Favorita',
+    chaveiro: 'Cor das Contas',
+    veiculo:  'Cor das Contas'
+  };
+  document.getElementById('label-cor').textContent = labelsCor[tipo] || 'Cor';
+  document.getElementById('cores-area').style.display = 'block';
+  document.getElementById('misterios-area').style.display = 'none';
+}
+
+function selectCorBase(el) {
+  selecao.corBase = el.dataset.cor;
+  selecao.cor = selecao.misterioCat = selecao.misterio = '';
+  precoCor = precoMisterio = 0;
+  recalcularTotal();
+  marcarSelecionado(el);
+
+  const tipo = selecao.tipo;
+  const cores = coresPorTipo[tipo] || coresDisponiveis;
+
+  let html = '';
+  cores[el.dataset.cor].forEach(t => {
+    html += `
+      <div class="option" data-nome="${t.nome}" data-preco="${t.preco}" onclick="selectCorFinal(this)">
+        ${renderMedia(t)}
+        <span>${t.nome}</span>
+        <span class="price">R$ ${t.preco},00</span>
+      </div>`;
+  });
+  document.getElementById('cores').innerHTML = html;
+}
+
+function selectCorFinal(el) {
+  selecao.cor = el.dataset.nome;
+  precoCor    = Number(el.dataset.preco);
+  selecao.misterioCat = selecao.misterio = '';
+  precoMisterio = 0;
+  recalcularTotal();
+  marcarSelecionado(el);
+
+  const tipo = selecao.tipo;
+  const bancoMisterios = bancoMisteriosPorTipo[tipo] || bancoMisteriosPorTipo.default;
+
+  let html = '';
+  Object.keys(bancoMisterios).forEach(cat => {
+    html += `<div class="option" data-cat="${cat}" onclick="selectMisterioCat(this)"><div class="option-media" style="font-size:28px">${bancoMisterios[cat][0]?.emoji || '📿'}</div>${cat}</div>`;
+  });
+  document.getElementById('misterios').innerHTML = html;
+
+  const labelsMisterio = {
+    noiva:    'Medalha Central',
+    luxo:     'Pingente Central',
+    infantil: 'Detalhes',
+    chaveiro: 'Pingente',
+    veiculo:  'Pingente'
+  };
+  document.getElementById('label-misterio').textContent = labelsMisterio[tipo] || 'Mistério';
+  document.getElementById('misterios-area').style.display = 'block';
+  document.getElementById('personalizacao-area').style.display = 'none';
+}
+
+function selectMisterioCat(el) {
+  selecao.misterioCat = el.dataset.cat;
+  selecao.misterio = ''; precoMisterio = 0;
+  recalcularTotal();
+  marcarSelecionado(el);
+
+  const tipo = selecao.tipo;
+  const bancoMisterios = bancoMisteriosPorTipo[tipo] || bancoMisteriosPorTipo.default;
+
+  let html = '';
+  bancoMisterios[el.dataset.cat].forEach(m => {
+    html += `
+      <div class="option" data-nome="${m.nome}" data-preco="${m.preco}" onclick="selectMisterioFinal(this)">
+        ${renderMedia(m)}
+        <span>${m.nome}</span>
+        <span class="price">R$ ${m.preco},00</span>
+      </div>`;
+  });
+  document.getElementById('misterios').innerHTML = html;
+}
+
+function selectMisterioFinal(el) {
+  selecao.misterio = el.dataset.nome;
+  precoMisterio    = Number(el.dataset.preco);
+  recalcularTotal();
+  marcarSelecionado(el);
+  mostrarPersonalizacao(selecao.tipo);
+}
+
+/* =============================================
+   PERSONALIZAÇÃO
+   ============================================= */
+function mostrarPersonalizacao(tipo) {
+  const area = document.getElementById('personalizacao-area');
+  const conteudo = document.getElementById('personalizacao-conteudo');
+
+  if (tipo === 'noiva') {
+    conteudo.innerHTML = `
+      <div class="campo-texto">
+        <label>Nome ou mensagem (opcional)</label>
+        <input type="text" id="pers-noiva" placeholder="Ex: Ana & João — 15/06/2025"
+          value="${selecao.personalizacao.texto || ''}"
+          oninput="selecao.personalizacao.texto = this.value">
+      </div>`;
+    area.style.display = 'block';
+
+  } else if (tipo === 'embalagem') {
+    conteudo.innerHTML = `
+      <div class="campo-texto">
+        <label>Nome do presenteado</label>
+        <input type="text" id="pers-nome" placeholder="Ex: Maria"
+          value="${selecao.personalizacao.nome || ''}"
+          oninput="selecao.personalizacao.nome = this.value">
+      </div>
+      <div class="campo-texto" style="margin-top:10px;">
+        <label>Cor da embalagem</label>
+        <input type="text" id="pers-cor" placeholder="Ex: Rosa, Azul, Dourado..."
+          value="${selecao.personalizacao.cor || ''}"
+          oninput="selecao.personalizacao.cor = this.value">
+      </div>
+      <div class="campo-texto" style="margin-top:10px;">
+        <label>Frase / Versículo (opcional)</label>
+        <textarea id="pers-frase" placeholder="Ex: Feliz aniversário! / João 3:16"
+          oninput="selecao.personalizacao.frase = this.value">${selecao.personalizacao.frase || ''}</textarea>
+      </div>
+      <div class="campo-texto" style="margin-top:10px;">
+        <label>Formato</label>
+        <div class="formato-opcoes">
+          <label>
+            <input type="radio" name="formato" value="livrinho"
+              ${selecao.personalizacao.formato === 'livrinho' ? 'checked' : ''}
+              onchange="selecao.personalizacao.formato = this.value">
+            Livrinho
+          </label>
+          <label>
+            <input type="radio" name="formato" value="folha-unica"
+              ${selecao.personalizacao.formato === 'folha-unica' ? 'checked' : ''}
+              onchange="selecao.personalizacao.formato = this.value">
+            Folha única
+          </label>
+        </div>
+      </div>
+      <div class="campo-upload" style="margin-top:10px;">
+        <label>Foto/Desenho (opcional)</label>
+        <input type="file" id="pers-foto" accept="image/*"
+          onchange="handleFotoUpload(this)">
+        <span id="foto-nome" style="font-size:11px;color:#bbb;margin-top:4px;display:block;">
+          ${selecao.personalizacao.fotoNome || 'Nenhum arquivo selecionado'}
+        </span>
+      </div>`;
+    area.style.display = 'block';
+
+  } else {
+    area.style.display = 'none';
+  }
+}
+
+function handleFotoUpload(input) {
+  if (input.files && input.files[0]) {
+    const arquivo = input.files[0];
+    selecao.personalizacao.fotoNome = arquivo.name;
+    document.getElementById('foto-nome').textContent = arquivo.name;
+    const reader = new FileReader();
+    reader.onload = e => { selecao.personalizacao.fotoBase64 = e.target.result; };
+    reader.readAsDataURL(arquivo);
+  }
+}
+
+/* =============================================
+   VALIDAÇÃO E FINALIZAÇÃO
+   ============================================= */
+function finalizar() {
+  const tipo = selecao.tipo;
+
+  if (!tipo) {
+    mostrarPopupErro('Campo obrigatório', 'Escolha o tipo do produto.');
+    return;
+  }
+  if (!selecao.categoria && tipo !== 'embalagem') {
+    mostrarPopupErro('Campo obrigatório', 'Escolha uma categoria.');
+    return;
+  }
+  if (!selecao.modelo) {
+    mostrarPopupErro('Campo obrigatório', 'Escolha um modelo.');
+    return;
+  }
+
+  if (!tiposSemCorMisterio.includes(tipo)) {
+    if (!selecao.cor) {
+      mostrarPopupErro('Campo obrigatório', 'Escolha a cor final.');
+      return;
+    }
+    if (!selecao.misterio) {
+      mostrarPopupErro('Campo obrigatório', 'Escolha um mistério / pingente.');
+      return;
+    }
+  }
+
+  const totalNum = precoModelo + precoCor + precoMisterio;
+
+  const nomes = {
+    pulso:       'Terço de Pulso',
+    tradicional: 'Terço Tradicional',
+    chaveiro:    'Chaveiro',
+    veiculo:     'Terço de Veículo',
+    noiva:       'Terço de Noiva',
+    luxo:        'Terço Luxo',
+    infantil:    'Terço Infantil',
+    embalagem:   'Embalagem'
+  };
+
+  // Monta objeto completo para o carrinho
+  const item = {
+    tipo,
+    nome:           nomes[tipo] || tipo,
+    categoria:      selecao.categoria || selecao.modelo,
+    modelo:         selecao.modelo,
+    cor:            selecao.cor      || '',
+    misterio:       selecao.misterio || '',
+    personalizacao: { ...selecao.personalizacao },
+    total:          totalNum,
+    origem:         'personalizado'
+  };
+
+  // Não salva base64 no localStorage
+  const itemSalvo = { ...item, personalizacao: { ...item.personalizacao } };
+  if (itemSalvo.personalizacao.fotoBase64) {
+    delete itemSalvo.personalizacao.fotoBase64;
+    itemSalvo.personalizacao.temFoto = true;
+  }
+
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  carrinho.push(itemSalvo);
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  mostrarPopupSucesso();
+}
+
+/* =============================================
+   POPUPS
+   ============================================= */
+function mostrarPopupSucesso() {
+  document.getElementById('popup-overlay').classList.add('ativo');
+}
+function fecharPopup() {
+  document.getElementById('popup-overlay').classList.remove('ativo');
+  selecao = { tipo:'', categoria:'', modelo:'', corBase:'', cor:'', misterioCat:'', misterio:'', personalizacao:{} };
+  precoModelo = precoCor = precoMisterio = 0;
+  recalcularTotal();
+  ['categorias-area','modelos-area','cores-area','misterios-area','personalizacao-area'].forEach(id =>
+    document.getElementById(id).style.display = 'none'
+  );
+  document.querySelectorAll('.option, .tipo-card').forEach(o => o.classList.remove('selected'));
+}
+function mostrarPopupErro(titulo, msg) {
+  document.getElementById('popup-erro-titulo').textContent = titulo;
+  document.getElementById('popup-erro-msg').textContent    = msg;
+  document.getElementById('popup-erro-overlay').classList.add('ativo');
+}
+function fecharPopupErro() {
+  document.getElementById('popup-erro-overlay').classList.remove('ativo');
+}
+
+document.getElementById('popup-overlay').addEventListener('click', function(e) {
+  if (e.target === this) fecharPopup();
+});
+document.getElementById('popup-erro-overlay').addEventListener('click', function(e) {
+  if (e.target === this) fecharPopupErro();
+});
+
+// Inicia progresso
+atualizarProgresso();
+</script>
+</body>
+</html>

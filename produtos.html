@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produtos Prontos — Laços Encantus</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --rose:    #ff4da6;
+  --gold:    #d4af37;
+  --gold-lt: #f5e27a;
+  --cream:   #fff9f4;
+  --ink:     #1a1218;
+  --muted:   #8a7080;
+  --card-bg: #ffffff;
+  --border:  #f0e0ea;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+header {
+  background: #fff;
+  border-bottom: 2px solid var(--gold);
+  padding: 12px 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(212,175,55,0.10);
+}
+
+.logo { width: 72px; cursor: pointer; }
+.logo-fallback {
+  width: 72px; height: 72px;
+  display: none; margin: 0 auto;
+  background: var(--gold); border-radius: 50%;
+  align-items: center; justify-content: center;
+  font-weight: 600; font-size: 12px; color: #fff; cursor: pointer;
+}
+
+nav {
+  background: var(--rose);
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .03em;
+  transition: opacity .2s;
+}
+nav a:hover { opacity: .75; }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #fff0f8 0%, #fffbe8 50%, #fff0f8 100%);
+  padding: 52px 20px 40px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 110%, rgba(212,175,55,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--rose);
+  letter-spacing: .12em;
+  margin-bottom: 8px;
+}
+
+.hero h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(42px, 9vw, 68px);
+  color: var(--gold);
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  color: var(--muted);
+  font-weight: 300;
+  max-width: 360px;
+  margin: 0 auto 28px;
+  line-height: 1.55;
+}
+
+/* Search */
+.search-wrap {
+  display: flex;
+  max-width: 400px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(212,175,55,.10);
+  transition: border-color .2s, box-shadow .2s;
+}
+.search-wrap:focus-within {
+  border-color: var(--rose);
+  box-shadow: 0 4px 24px rgba(255,77,166,.14);
+}
+
+.search-wrap input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  background: transparent;
+  color: var(--ink);
+}
+.search-wrap input::placeholder { color: #ccc; }
+
+.search-btn {
+  background: var(--rose);
+  border: none;
+  padding: 12px 18px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  transition: background .2s;
+  flex-shrink: 0;
+}
+.search-btn:hover { background: #e6008c; }
+
+/* ── FILTROS ── */
+.filtros-wrap {
+  padding: 20px 16px 0;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.filtros-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.filtros-scroll::-webkit-scrollbar { display: none; }
+
+.chip {
+  flex-shrink: 0;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  border-radius: 24px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.chip:hover { border-color: var(--rose); color: var(--rose); }
+.chip.ativo {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: #fff;
+}
+
+/* ── SORT ── */
+.toolbar {
+  max-width: 960px;
+  margin: 14px auto 0;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.count-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sort-select {
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ── GRID ── */
+.grid-wrap {
+  max-width: 960px;
+  margin: 18px auto 40px;
+  padding: 0 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 600px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 800px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  transition: transform .22s, box-shadow .22s;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(212,175,55,.14);
+}
+
+.card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  background: var(--rose);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: .04em;
+}
+.card-badge.novo { background: #1db954; }
+.card-badge.destaque { background: var(--gold); color: #222; }
+
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, #fff5fb, #fffbe8);
+}
+
+.card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .35s ease;
+  display: block;
+}
+.card:hover .card-img-wrap img { transform: scale(1.06); }
+
+.card-emoji {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  background: linear-gradient(135deg, #fff5fb, #fffbe8);
+}
+
+.card-body {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-cat {
+  font-size: 10px;
+  color: var(--rose);
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.card-nome {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 6px;
+  flex: 1;
+}
+
+.card-desc {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.card-preco {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gold);
+}
+.card-preco-de {
+  font-size: 11px;
+  color: #ccc;
+  text-decoration: line-through;
+  display: block;
+  line-height: 1;
+}
+
+.btn-add {
+  background: var(--gold);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  white-space: nowrap;
+  color: #1a1218;
+}
+.btn-add:hover { background: var(--gold-lt); transform: scale(1.04); }
+.btn-add.adicionado { background: #1db954; color: white; }
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+  grid-column: 1 / -1;
+}
+.empty-state .emoji { font-size: 48px; margin-bottom: 12px; }
+.empty-state p { font-size: 14px; }
+
+/* ── MODAL PRODUTO ── */
+#modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20,10,18,.55);
+  z-index: 200;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+}
+#modal-overlay.ativo { display: flex; }
+
+#modal-caixa {
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  padding: 28px 24px 36px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 92vh;
+  overflow-y: auto;
+  animation: slideUp .28s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(60px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modal-handle {
+  width: 40px; height: 4px;
+  background: #eee;
+  border-radius: 4px;
+  margin: 0 auto 20px;
+}
+
+.modal-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff5fb, #fffbe8);
+}
+.modal-emoji-full {
+  width: 100%;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 88px;
+  background: linear-gradient(135deg, #fff5fb, #fffbe8);
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+.modal-cat {
+  font-size: 11px;
+  color: var(--rose);
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.modal-nome {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.modal-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+.modal-preco {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.modal-tag {
+  background: #fff5f9;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.btn-modal-add {
+  width: 100%;
+  padding: 14px;
+  background: var(--rose);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+  letter-spacing: .02em;
+}
+.btn-modal-add:hover { background: #e6008c; }
+
+.btn-modal-fechar {
+  width: 100%;
+  padding: 12px;
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  margin-top: 10px;
+  transition: border-color .2s;
+}
+.btn-modal-fechar:hover { border-color: #ccc; }
+
+/* ── TOAST ── */
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 300;
+  transition: transform .3s ease, opacity .3s;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#toast.visivel {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ── CARRINHO FLUTUANTE ── */
+#fab-carrinho {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  background: var(--rose);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 13px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(255,77,166,.35);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 150;
+  transition: transform .2s, box-shadow .2s;
+}
+#fab-carrinho:hover { transform: scale(1.05); box-shadow: 0 8px 32px rgba(255,77,166,.45); }
+
+#fab-badge {
+  background: var(--gold);
+  color: #1a1218;
+  border-radius: 50%;
+  width: 20px; height: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <img
+    src="logo.png" class="logo" alt="Laços Encantus"
+    onclick="window.location.href='index.html'"
+    onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='flex';"
+  >
+  <div class="logo-fallback" onclick="window.location.href='index.html'">Laços</div>
+</header>
+
+<nav>
+  <a href="index.html">Início</a>
+  <a href="terco.html">Montar</a>
+  <a href="produtos.html">Produtos</a>
+  <a href="carrinho.html">🛒 Carrinho</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Coleção Especial</p>
+  <h1>Produtos Prontos</h1>
+  <p class="hero-sub">Peças selecionadas com amor, prontas para iluminar sua fé e sua vida.</p>
+
+  <div class="search-wrap">
+    <input type="text" id="busca" placeholder="Buscar produto..." oninput="aplicarFiltros()">
+    <button class="search-btn" aria-label="Buscar">🔍</button>
+  </div>
+</section>
+
+<!-- FILTROS -->
+<div class="filtros-wrap">
+  <div class="filtros-scroll" id="chips"></div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <span class="count-label" id="count-label">Carregando...</span>
+  <select class="sort-select" id="sort-select" onchange="aplicarFiltros()">
+    <option value="padrao">Destaques primeiro</option>
+    <option value="menor">Menor preço</option>
+    <option value="maior">Maior preço</option>
+    <option value="nome">A → Z</option>
+  </select>
+</div>
+
+<!-- GRID -->
+<div class="grid-wrap">
+  <div class="grid" id="grid"></div>
+</div>
+
+<!-- MODAL PRODUTO -->
+<div id="modal-overlay">
+  <div id="modal-caixa">
+    <div class="modal-handle"></div>
+    <div id="modal-conteudo"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast">✅ Adicionado ao carrinho!</div>
+
+<!-- FAB CARRINHO -->
+<button id="fab-carrinho" onclick="window.location.href='carrinho.html'">
+  🛒 Carrinho <span id="fab-badge">0</span>
+</button>
+
+<script>
+
+/* ─── BANCO DE PRODUTOS ─── */
+const PRODUTOS = [
+
+  /* ── IMAGENS DE SANTOS ── */
+  {
+    id: 1, cat: 'Santos',
+    nome: 'Nossa Senhora Aparecida',
+    desc: 'Imagem de resina com pintura artesanal detalhada. Perfeita para altar ou presente.',
+    preco: 85, precoOriginal: 110,
+    emoji: '🕊️',
+    tags: ['Resina', 'Artesanal', 'Presente'],
+    badge: 'destaque'
+  },
+  {
+    id: 2, cat: 'Santos',
+    nome: 'Santo Antônio',
+    desc: 'Imagem tradicional em gesso pintado à mão. Padroeiro dos casamentos e das causas perdidas.',
+    preco: 70, precoOriginal: null,
+    emoji: '🙏',
+    tags: ['Gesso', 'Pintado à mão'],
+    badge: null
+  },
+  {
+    id: 3, cat: 'Santos',
+    nome: 'São Bento',
+    desc: 'Imagem com medalha benta inclusa. Proteção para o lar e afastamento do mal.',
+    preco: 75, precoOriginal: null,
+    emoji: '✝️',
+    tags: ['Com medalha', 'Proteção'],
+    badge: 'novo'
+  },
+  {
+    id: 4, cat: 'Santos',
+    nome: 'Santa Rita de Cássia',
+    desc: 'A santa das causas impossíveis. Belíssima imagem em resina policromada.',
+    preco: 80, precoOriginal: null,
+    emoji: '🌹',
+    tags: ['Resina', 'Policromada'],
+    badge: null
+  },
+  {
+    id: 5, cat: 'Santos',
+    nome: 'São Miguel Arcanjo',
+    desc: 'Imagem imponente do arcanjo guerreiro. Proteção espiritual e força.',
+    preco: 95, precoOriginal: 120,
+    emoji: '⚔️',
+    tags: ['Resina', 'Grande', 'Destaque'],
+    badge: 'destaque'
+  },
+  {
+    id: 6, cat: 'Santos',
+    nome: 'Sagrada Família',
+    desc: 'Jesus, Maria e José juntos. Bênção para o lar e a família.',
+    preco: 100, precoOriginal: null,
+    emoji: '👨‍👩‍👦',
+    tags: ['Família', 'Lar', 'Bênção'],
+    badge: null
+  },
+
+  /* ── TERÇOS PRONTOS ── */
+  {
+    id: 7, cat: 'Terços',
+    nome: 'Terço Tradicional Azul',
+    desc: 'Terço clássico em contas azuis peroladas com medalha de Nossa Senhora.',
+    preco: 35, precoOriginal: null,
+    emoji: '📿',
+    tags: ['Azul', 'Perolado', 'N. Sra.'],
+    badge: null
+  },
+  {
+    id: 8, cat: 'Terços',
+    nome: 'Terço de Pulso Rosa',
+    desc: 'Delicado terço de pulso em contas rosadas. Ideal para o dia a dia.',
+    preco: 28, precoOriginal: null,
+    emoji: '🌸',
+    tags: ['Pulso', 'Rosa', 'Dia a dia'],
+    badge: 'novo'
+  },
+  {
+    id: 9, cat: 'Terços',
+    nome: 'Terço Luxo Cristal',
+    desc: 'Contas de cristal facetado com acabamento dourado. Peça especial e sofisticada.',
+    preco: 85, precoOriginal: 105,
+    emoji: '✨',
+    tags: ['Cristal', 'Dourado', 'Luxo'],
+    badge: 'destaque'
+  },
+  {
+    id: 10, cat: 'Terços',
+    nome: 'Terço Infantil Arco-Íris',
+    desc: 'Colorido e divertido para as crianças. Contas suaves e seguras.',
+    preco: 22, precoOriginal: null,
+    emoji: '🌈',
+    tags: ['Infantil', 'Colorido', 'Suave'],
+    badge: null
+  },
+  {
+    id: 11, cat: 'Terços',
+    nome: 'Terço de Noiva Pérola',
+    desc: 'Terço especial para o grande dia. Contas de pérola com laço de cetim branco.',
+    preco: 65, precoOriginal: 80,
+    emoji: '💍',
+    tags: ['Noiva', 'Pérola', 'Cetim'],
+    badge: 'destaque'
+  },
+  {
+    id: 12, cat: 'Terços',
+    nome: 'Terço São Bento Preto',
+    desc: 'Terço tradicional em contas pretas com crucifixo e medalha de São Bento.',
+    preco: 38, precoOriginal: null,
+    emoji: '🖤',
+    tags: ['São Bento', 'Proteção'],
+    badge: null
+  },
+
+  /* ── ACESSÓRIOS ── */
+  {
+    id: 13, cat: 'Acessórios',
+    nome: 'Caixinha Coração Dourada',
+    desc: 'Embalagem luxuosa em formato de coração para presentear com elegância.',
+    preco: 18, precoOriginal: null,
+    emoji: '💛',
+    tags: ['Embalagem', 'Presente', 'Dourada'],
+    badge: null
+  },
+  {
+    id: 14, cat: 'Acessórios',
+    nome: 'Chaveiro São Bento',
+    desc: 'Chaveiro artesanal com medalha de São Bento e contas coloridas.',
+    preco: 20, precoOriginal: null,
+    emoji: '🔑',
+    tags: ['Chaveiro', 'São Bento', 'Proteção'],
+    badge: 'novo'
+  },
+  {
+    id: 15, cat: 'Acessórios',
+    nome: 'Porta-Terço Organza',
+    desc: 'Sachê de organza para guardar e presentear terços. Disponível em várias cores.',
+    preco: 8, precoOriginal: null,
+    emoji: '🎀',
+    tags: ['Organza', 'Embalagem'],
+    badge: null
+  },
+  {
+    id: 16, cat: 'Acessórios',
+    nome: 'Terço de Veículo',
+    desc: 'Terço especial para pendurar no retrovisor. Proteção nas estradas.',
+    preco: 30, precoOriginal: null,
+    emoji: '🚗',
+    tags: ['Veículo', 'Proteção', 'Viagem'],
+    badge: null
+  },
+  {
+    id: 17, cat: 'Acessórios',
+    nome: 'Kit Lembrancinha Batismo',
+    desc: 'Mini terço + caixinha personalizada. Lembrança perfeita para batizados.',
+    preco: 28, precoOriginal: 35,
+    emoji: '🕊️',
+    tags: ['Batismo', 'Kit', 'Lembrança'],
+    badge: 'destaque'
+  },
+  {
+    id: 18, cat: 'Acessórios',
+    nome: 'Kit Lembrancinha Casamento',
+    desc: 'Mini terço branco + sachê de organza. Lembrança delicada para convidados.',
+    preco: 22, precoOriginal: null,
+    emoji: '👰',
+    tags: ['Casamento', 'Kit', 'Lembrança'],
+    badge: null
+  },
+];
+
+const CATEGORIAS = ['Todos', ...new Set(PRODUTOS.map(p => p.cat))];
+
+/* ─── ESTADO ─── */
+let catAtual = 'Todos';
+let busca = '';
+let sort  = 'padrao';
+
+/* ─── INIT ─── */
+function init() {
+  renderChips();
+  aplicarFiltros();
+  atualizarFAB();
+}
+
+/* ─── CHIPS ─── */
+function renderChips() {
+  const cont = document.getElementById('chips');
+  cont.innerHTML = CATEGORIAS.map(c => `
+    <div class="chip ${c === catAtual ? 'ativo' : ''}" onclick="selecionarCat('${c}')">${c}</div>
+  `).join('');
+}
+
+function selecionarCat(cat) {
+  catAtual = cat;
+  renderChips();
+  aplicarFiltros();
+}
+
+/* ─── FILTRAR / SORT / RENDER ─── */
+function aplicarFiltros() {
+  busca = document.getElementById('busca').value.toLowerCase().trim();
+  sort  = document.getElementById('sort-select').value;
+
+  let lista = PRODUTOS.filter(p => {
+    const matchCat  = catAtual === 'Todos' || p.cat === catAtual;
+    const matchBusca = !busca ||
+      p.nome.toLowerCase().includes(busca) ||
+      p.desc.toLowerCase().includes(busca) ||
+      p.tags.some(t => t.toLowerCase().includes(busca));
+    return matchCat && matchBusca;
+  });
+
+  if (sort === 'menor') lista.sort((a,b) => a.preco - b.preco);
+  else if (sort === 'maior') lista.sort((a,b) => b.preco - a.preco);
+  else if (sort === 'nome')  lista.sort((a,b) => a.nome.localeCompare(b.nome));
+  else lista.sort((a,b) => (b.badge ? 1 : 0) - (a.badge ? 1 : 0));
+
+  renderGrid(lista);
+}
+
+function renderGrid(lista) {
+  const grid = document.getElementById('grid');
+  document.getElementById('count-label').textContent =
+    lista.length === 0 ? 'Nenhum produto encontrado'
+    : `${lista.length} produto${lista.length > 1 ? 's' : ''}`;
+
+  if (lista.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="emoji">🔍</div>
+        <p>Nenhum produto encontrado para "<strong>${busca || catAtual}</strong>".</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = lista.map(p => {
+    const badgeHtml = p.badge
+      ? `<span class="card-badge ${p.badge}">${badgeLabel(p.badge)}</span>`
+      : '';
+    const precoDeHtml = p.precoOriginal
+      ? `<span class="card-preco-de">R$ ${p.precoOriginal}</span>`
+      : '';
+
+    return `
+      <div class="card" onclick="abrirModal(${p.id})">
+        ${badgeHtml}
+        <div class="card-img-wrap">
+          <div class="card-emoji">${p.emoji}</div>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">${p.cat}</span>
+          <div class="card-nome">${p.nome}</div>
+          <div class="card-footer">
+            <div class="card-preco">
+              ${precoDeHtml}
+              R$ ${p.preco}
+            </div>
+            <button class="btn-add" id="btn-${p.id}"
+              onclick="event.stopPropagation(); addCarrinho(${p.id}, this)">
+              + Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function badgeLabel(b) {
+  return { destaque: '⭐ Destaque', novo: '✨ Novo', promocao: '🔥 Promo' }[b] || b;
+}
+
+/* ─── MODAL ─── */
+function abrirModal(id) {
+  const p = PRODUTOS.find(x => x.id === id);
+  if (!p) return;
+
+  const precoDeHtml = p.precoOriginal
+    ? `<span style="font-size:14px;color:#ccc;text-decoration:line-through;margin-right:6px">R$ ${p.precoOriginal}</span>`
+    : '';
+
+  const tagsHtml = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+
+  document.getElementById('modal-conteudo').innerHTML = `
+    <div class="modal-emoji-full">${p.emoji}</div>
+    <p class="modal-cat">${p.cat}</p>
+    <h2 class="modal-nome">${p.nome}</h2>
+    <p class="modal-desc">${p.desc}</p>
+    <div class="modal-preco">${precoDeHtml}R$ ${p.preco},00</div>
+    <div class="modal-tags">${tagsHtml}</div>
+    <button class="btn-modal-add" onclick="addCarrinho(${p.id}, null); fecharModal()">
+      🛒 Adicionar ao Carrinho
+    </button>
+    <button class="btn-modal-fechar" onclick="fecharModal()">Fechar</button>
+  `;
+
+  document.getElementById('modal-overlay').classList.add('ativo');
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharModal() {
+  document.getElementById('modal-overlay').classList.remove('ativo');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) fecharModal();
+});
+
+/* ─── CARRINHO — compatível com terco.html ─── */
+function addCarrinho(id, btnEl) {
+  const p = PRODUTOS.find(x => x.id === id);
+  if (!p) return;
+
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+  // Formato unificado: mesma estrutura do terco.html
+  carrinho.push({
+    origem:         'produto',          // ← identifica que veio de produtos.html
+    tipo:           'produto',
+    nome:           p.nome,
+    categoria:      p.cat,
+    modelo:         p.nome,
+    cor:            '',
+    misterio:       '',
+    personalizacao: '',
+    total:          p.preco
+  });
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+  if (btnEl) {
+    btnEl.textContent = '✔ OK!';
+    btnEl.classList.add('adicionado');
+    setTimeout(() => {
+      btnEl.textContent = '+ Adicionar';
+      btnEl.classList.remove('adicionado');
+    }, 1200);
+  }
+
+  mostrarToast('✅ ' + p.nome + ' adicionado!');
+  atualizarFAB();
+}
+
+function atualizarFAB() {
+  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  document.getElementById('fab-badge').textContent = carrinho.length;
+}
+
+/* ─── TOAST ─── */
+let toastTimer;
+function mostrarToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('visivel');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('visivel'), 2400);
+}
+
+/* ─── START ─── */
+init();
+</script>
+
+</body>
+</html>

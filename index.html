@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laços Encantus — Terços Personalizados</title>
+
+  <meta name="description" content="Monte seu terço personalizado com fé e estilo. Laços Encantus — terços artesanais feitos com amor e entregues na sua casa.">
+  <meta name="keywords" content="terço personalizado, terço artesanal, laços encantus, terço católico">
+  <meta name="author" content="Laços Encantus">
+
+  <meta property="og:title" content="Laços Encantus — Terços Personalizados">
+  <meta property="og:description" content="Monte seu terço do seu jeito e receba em casa. +2000 terços já enviados!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://media.discordapp.net/attachments/1496138227331891282/1497288558875250828/7ec1137f-84bb-451d-8063-dcc4e4bd2a73.jpg?ex=69ecfa22&is=69eba8a2&hm=a48bb20aa13b7533764a7f7cfb671a9dcb9041400782650ab40d6bbbbda9e68c&=&format=webp&width=1676&height=838">
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold:       #d4af37;
+      --gold-light: #f0d060;
+      --gold-pale:  #fffbe8;
+      --pink:       #ff4da6;
+      --pink-dark:  #e0398e;
+      --pink-soft:  #fff0f6;
+      --pink-pale:  #ffe6f2;
+      --text:       #1a1218;
+      --text-mid:   #5a4a52;
+      --text-light: #a09098;
+      --white:      #ffffff;
+      --cream:      #fff9f5;
+      --border:     #f0e0ea;
+      --radius:     16px;
+      --shadow:     0 8px 32px rgba(0,0,0,0.10);
+      --shadow-gold: 0 8px 32px rgba(212,175,55,0.20);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      padding: 12px 20px;
+      text-align: center;
+      border-bottom: 1.5px solid rgba(212,175,55,0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(212,175,55,0.10);
+      transition: box-shadow 0.3s;
+    }
+
+    .logo {
+      width: 76px;
+      cursor: pointer;
+      transition: transform 0.25s, opacity 0.2s;
+    }
+    .logo:hover { transform: scale(1.06); }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--pink);
+      padding: 0 20px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 13.5px;
+      letter-spacing: 0.3px;
+      padding: 12px 14px;
+      border-bottom: 2.5px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    nav a:hover {
+      border-bottom-color: var(--gold-light);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, var(--white) 0%, #fff0f8 40%, var(--gold-pale) 100%);
+      padding: 56px 24px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Ornamento de fundo */
+    .hero::before {
+      content: '✝';
+      position: absolute;
+      font-size: 320px;
+      color: rgba(212,175,55,0.04);
+      top: -40px;
+      right: -40px;
+      pointer-events: none;
+      line-height: 1;
+      font-family: serif;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,77,166,0.06) 0%, transparent 70%);
+      bottom: -80px;
+      left: -60px;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--pink);
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(52px, 12vw, 82px);
+      color: var(--gold);
+      line-height: 1.05;
+      margin-bottom: 14px;
+      animation: fadeUp 0.7s 0.1s ease both;
+      filter: drop-shadow(0 2px 8px rgba(212,175,55,0.18));
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 3vw, 19px);
+      color: var(--text-mid);
+      font-weight: 300;
+      font-style: italic;
+      max-width: 400px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    /* BANNER IMAGE */
+    .banner-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .banner-container img {
+      width: 100%;
+      height: clamp(200px, 42vw, 400px);
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.14), 0 0 0 1px rgba(212,175,55,0.15);
+      display: block;
+    }
+
+    /* Overlay suave na imagem */
+    .banner-container::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.22) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .banner-btn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1a1a;
+      border: none;
+      padding: 14px 32px;
+      font-weight: 700;
+      font-size: 14.5px;
+      font-family: 'DM Sans', sans-serif;
+      border-radius: 50px;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 6px 24px rgba(212,175,55,0.45);
+      z-index: 2;
+      letter-spacing: 0.2px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .banner-btn:hover {
+      transform: translateX(-50%) translateY(-3px);
+      box-shadow: 0 10px 32px rgba(212,175,55,0.55);
+    }
+    .banner-btn:active {
+      transform: translateX(-50%) translateY(-1px);
+    }
+
+    /* ── PROVA SOCIAL ── */
+    .social-proof {
+      max-width: 560px;
+      margin: 28px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 0 20px;
+      animation: fadeUp 0.7s 0.4s ease both;
+      flex-wrap: wrap;
+    }
+
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-mid);
+    }
+    .proof-icon {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, var(--gold-pale), #fff5f0);
+      border: 1.5px solid rgba(212,175,55,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .proof-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1.2;
+    }
+
+    /* ── DIVISOR ORNAMENTAL ── */
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 36px 24px;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+    .ornament::before,
+    .ornament::after {
+      content: '';
+      flex: 1;
+      max-width: 140px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .ornament::after {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+    .ornament span {
+      font-size: 18px;
+      letter-spacing: 10px;
+      padding: 0 4px;
+    }
+
+    /* ── SEÇÕES DE GALERIA ── */
+    .gallery-section {
+      padding: 16px 24px 36px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .gallery-img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      display: block;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .gallery-img:hover {
+      transform: scale(1.015);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.14);
+    }
+
+    /* ── CARDS DE BENEFÍCIOS ── */
+    .benefits {
+      background: linear-gradient(135deg, var(--pink-soft), var(--gold-pale));
+      padding: 40px 24px;
+    }
+
+    .benefits-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    @media (min-width: 600px) {
+      .benefits-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .benefit-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+      border: 1.5px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .benefit-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(212,175,55,0.12);
+    }
+    .benefit-icon { font-size: 28px; margin-bottom: 8px; }
+    .benefit-title {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .benefit-desc {
+      font-size: 11.5px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* ── CTA CENTRAL ── */
+    .cta-section {
+      padding: 48px 24px;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .cta-inner {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .cta-section h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(38px, 8vw, 56px);
+      color: var(--gold);
+      margin-bottom: 10px;
+      filter: drop-shadow(0 2px 6px rgba(212,175,55,0.15));
+    }
+    .cta-section p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      color: var(--text-mid);
+      font-style: italic;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color: var(--white);
+      padding: 15px 36px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 15px;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(255,77,166,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.2px;
+    }
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(255,77,166,0.45);
+    }
+
+    /* ── CONTATO ── */
+    .contact-section {
+      padding: 44px 24px;
+      text-align: center;
+      background: linear-gradient(135deg, #fff0f8, var(--gold-pale));
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .contact-section p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pink);
+      color: var(--white);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 4px 16px rgba(255,77,166,0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(255,77,166,0.38);
+    }
+    .contact-link.whatsapp {
+      background: linear-gradient(135deg, #25D366, #1eba57);
+      box-shadow: 0 4px 16px rgba(37,211,102,0.28);
+    }
+    .contact-link.whatsapp:hover {
+      box-shadow: 0 8px 24px rgba(37,211,102,0.42);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--pink);
+      color: rgba(255,255,255,0.92);
+      padding: 20px 24px;
+      font-size: 12.5px;
+      text-align: center;
+      letter-spacing: 0.2px;
+      line-height: 1.8;
+    }
+    footer strong { color: var(--white); }
+
+    /* ── FAB CARRINHO ── */
+    #fab-carrinho {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      background: var(--pink);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 13px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(255,77,166,0.38);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 150;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    #fab-carrinho.visivel {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #fab-carrinho:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 32px rgba(255,77,166,0.48);
+    }
+
+    #fab-badge {
+      background: var(--gold);
+      color: #1a1218;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── ANIMAÇÕES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 480px) {
+      nav a { font-size: 12.5px; padding: 11px 10px; }
+      .banner-btn { font-size: 13px; padding: 12px 22px; bottom: 14px; }
+      .social-proof { gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <img src="logo.png" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})" alt="Logo Laços Encantus"
+      onerror="this.style.display='none'">
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="terco.html">Montar</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="carrinho.html">🛒 Carrinho</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Artesanal · Católico · Com amor</p>
+    <h1>Laços Encantus</h1>
+    <p class="hero-sub">Terços feitos à mão com fé,<br>personalizados do seu jeito.</p>
+
+    <div class="banner-container">
+      <img
+        src="https://media.discordapp.net/attachments/1496138227331891282/1497288558875250828/7ec1137f-84bb-451d-8063-dcc4e4bd2a73.jpg?ex=69ecfa22&is=69eba8a2&hm=a48bb20aa13b7533764a7f7cfb671a9dcb9041400782650ab40d6bbbbda9e68c&=&format=webp&width=1676&height=838"
+        alt="Terços artesanais personalizados Laços Encantus"
+      >
+      <button class="banner-btn" onclick="window.location.href='terco.html'">
+        ✨ Montar Meu Terço
+      </button>
+    </div>
+
+    <!-- PROVA SOCIAL -->
+    <div class="social-proof">
+      <div class="proof-item">
+        <div class="proof-icon">💗</div>
+        <div class="proof-text">
+          <strong>+2.000</strong>
+          terços enviados
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">💛</div>
+        <div class="proof-text">
+          <strong>100%</strong>
+          artesanal
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">🚚</div>
+        <div class="proof-text">
+          <strong>Entrega</strong>
+          em todo Brasil
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORNAMENTO -->
+  <div class="ornament"><span>✝ 💛 ✝</span></div>
+
+  <!-- GALERIA: PERSONALIZADOS -->
+  <div class="gallery-section reveal">
+    <div class="section-header">
+      <p class="section-eyebrow">Feito para você</p>
+      <h2 class="section-title">Terços Personalizados</h2>
+    </div>
+    <img
+      class="gallery-img"
+      src="https://media.discordapp.net/attachments/1496138227331891282/1497299494528876686/WhatsApp_Image_2026-04-24_at_15.12.16.jpeg?ex=69ed0451&is=69ebb2d1&hm=fce0a19f0bb7bb9cea000bad0ab5733811c7906a2052351c3423cc722e2a8bb9&=&format=webp&width=1141&height=953"
+      alt="Terços personalizados feitos à mão - Laços Encantus"
+    >
+  </div>
+
+  <!-- ORNAMENTO -->
+  <div class="ornament"><span>💛 ✝ 💛</span></div>
+
+  <!-- GALERIA: PRONTOS -->
+  <div class="gallery-section reveal">
+    <div class="section-header">
+      <p class="section-eyebrow">Pronto para levar</p>
+      <h2 class="section-title">Terços Prontos</h2>
+    </div>
+    <img
+      class="gallery-img"
+      src="https://media.discordapp.net/attachments/1496138227331891282/1496210710148153424/6675570c-0c3e-419f-9295-0a0a0744bd54.jpg"
+      alt="Terços prontos disponíveis na loja - Laços Encantus"
+    >
+  </div>
+
+  <!-- ORNAMENTO -->
+  <div class="ornament"><span>✝ 💛 ✝</span></div>
+
+  <!-- BENEFÍCIOS -->
+  <section class="benefits reveal">
+    <div class="benefits-inner">
+      <div class="section-header">
+        <p class="section-eyebrow">Por que escolher a gente</p>
+        <h2 class="section-title">Fé, amor e dedicação em cada peça</h2>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">🙏</div>
+          <div class="benefit-title">Feito com fé</div>
+          <div class="benefit-desc">Cada terço é montado com oração e cuidado artesanal</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🎨</div>
+          <div class="benefit-title">Personalizado</div>
+          <div class="benefit-desc">Você escolhe cor, modelo, mistério e mais</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📦</div>
+          <div class="benefit-title">Embalagem especial</div>
+          <div class="benefit-desc">Chegou para presentear do jeitinho certo</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">💬</div>
+          <div class="benefit-title">Atendimento</div>
+          <div class="benefit-desc">Suporte direto pelo WhatsApp, com carinho</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section reveal">
+    <div class="cta-inner">
+      <h2>Monte o seu agora</h2>
+      <p>Escolha cada detalhe e crie um terço único,<br>com sua identidade e sua fé.</p>
+      <a href="terco.html" class="cta-btn">✨ Começar a montar</a>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contact-section reveal">
+    <h2>Fale com a gente</h2>
+    <p>Estamos sempre prontas para te atender com amor 💛</p>
+    <div class="contact-links">
+      <a
+        href="https://wa.me/5587996454478"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="contact-link whatsapp"
+        aria-label="Fale conosco pelo WhatsApp"
+      >
+        📲 WhatsApp
+      </a>
+      <a
+        href="https://instagram.com/lacosencantus"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="contact-link"
+        aria-label="Siga no Instagram"
+      >
+        📸 @lacosencantus
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong>Laços Encantus</strong> · Terços artesanais com fé e amor 💛<br>
+    © 2026 — Todos os direitos reservados
+  </footer>
+
+  <!-- FAB CARRINHO -->
+  <button id="fab-carrinho" onclick="window.location.href='carrinho.html'">
+    🛒 Carrinho <span id="fab-badge">0</span>
+  </button>
+
+  <script>
+    // FAB: mostra carrinho quando tem itens
+    function atualizarFAB() {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const fab = document.getElementById('fab-carrinho');
+      const badge = document.getElementById('fab-badge');
+      badge.textContent = carrinho.length;
+      if (carrinho.length > 0) {
+        fab.classList.add('visivel');
+      } else {
+        fab.classList.remove('visivel');
+      }
+    }
+    atualizarFAB();
+
+    // Scroll reveal suave
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
